@@ -15,8 +15,8 @@ st.markdown(
 st.markdown("""
     <style>
     pre {
-        background-color: #1e293b !important;  /* Dark background */
-        color: #f8fafc !important;            /* Light text */
+        background-color: #1e293b !important;
+        color: #f8fafc !important;
         border-radius: 6px;
         padding: 1rem;
     }
@@ -37,10 +37,8 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded = urllib.parse.unquote(utf8_input)
-
             st.markdown("#### Decoded URL")
             st.code(decoded, language="text")
-
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
