@@ -27,7 +27,10 @@ if decode_clicked:
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded Output")
-            st.code(decoded_text, language="text")
+            st.markdown(
+                f"<div style='word-wrap: break-word; white-space: pre-wrap; font-family: monospace; background-color: #f0f2f6; padding: 1rem; border-radius: 6px;'>{decoded_text}</div>",
+                unsafe_allow_html=True
+            )
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
