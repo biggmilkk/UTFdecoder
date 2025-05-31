@@ -35,17 +35,19 @@ if decode_clicked:
                     word-wrap: break-word;
                     white-space: pre-wrap;
                     font-family: monospace;
-                    background-color: #e5e7eb;  /* light gray */
-                    color: #111827;  /* dark text */
+                    background-color: #ffffff;
+                    color: #000000;
                     padding: 1rem;
                     border-radius: 6px;
-                    border: 1px solid #d1d5db;
+                    border: 2px solid #2563eb;
                     text-align: left;
                     transition: background-color 0.2s;
                 " title="Click to copy">
                     {decoded_text}
                 </div>
-                <p id="copied-msg" style="text-align: center; color: green; font-size: 0.85rem; display: none; margin-top: 5px;">✅ Copied to clipboard!</p>
+                <div id="copied-msg" style="text-align: center; display: none; margin-top: 10px;">
+                    <span style="color: green; font-weight: 500;">✅ Copied to clipboard!</span>
+                </div>
 
                 <script>
                 function copyDecoded() {{
