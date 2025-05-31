@@ -28,7 +28,7 @@ if decode_clicked:
             decoded = urllib.parse.unquote(utf8_input)
 
             # --- Wrap decoded text to improve visual height in st.code ---
-            wrapped = "\n".join(textwrap.wrap(decoded, width=80))
+            wrapped = "\n".join(textwrap.wrap(decoded, width=200))
 
             st.markdown("#### Decoded URL")
             st.code(wrapped, language="text")  # ✅ Copy icon works
