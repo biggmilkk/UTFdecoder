@@ -10,10 +10,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- Decode Form ---
+# --- Input Form ---
 st.markdown("#### Input")
 
-with st.form(key="decode_form"):
+with st.form("decode_form"):
     utf8_input = st.text_area(
         "Encoded URL:",
         placeholder="Example: https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dtest",
@@ -21,16 +21,22 @@ with st.form(key="decode_form"):
     )
     decode_clicked = st.form_submit_button("Decode", use_container_width=True)
 
-# --- Result ---
+# --- Output Result ---
 if decode_clicked:
     if utf8_input.strip():
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
-            st.success("Decoded Output")
-            st.code(decoded_text, language="text")
-            
-            # Add paragraph spacing after the code block
-            st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+            st.success("Decoded URL")
+
+            # Wrapped, copyable, readable output
+            st.text_area(
+                "Decoded Output:",
+                value=decoded_text,
+                height=150,
+                disabled=True
+            )
+
+            st.caption("✅ Click inside the box and press Ctrl+C (or Cmd+C on Mac) to copy the decoded URL.")
 
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
