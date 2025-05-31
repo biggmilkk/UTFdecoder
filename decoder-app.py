@@ -1,17 +1,29 @@
 import streamlit as st
 import urllib.parse
-import textwrap
 
 st.set_page_config(page_title="UTF-8 URL Decoder", layout="centered")
 
 # --- Title ---
 st.markdown("<h2 style='text-align: center;'>UTF-8 URL Decoder</h2>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align: center; font-size: 0.9rem; color: grey;'>Paste a UTF-8 encoded URL below to decode it. No data is stored.</p>",
+    "<p style='text-align: center; font-size: 0.9rem; color: grey;'>"
+    "Paste a UTF-8 encoded URL below to decode it. No data is stored.</p>",
     unsafe_allow_html=True
 )
 
-# --- Input ---
+# --- Custom style to change code block colors ---
+st.markdown("""
+    <style>
+    pre {
+        background-color: #1e293b !important;  /* Dark background */
+        color: #f8fafc !important;            /* Light text */
+        border-radius: 6px;
+        padding: 1rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# --- Input Form ---
 with st.form("decode_form"):
     utf8_input = st.text_area(
         "Encoded URL:",
@@ -25,9 +37,11 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded = urllib.parse.unquote(utf8_input)
-            wrapped = "\n".join(textwrap.wrap(decoded, width=80))
+
             st.markdown("#### Decoded URL")
-            st.code(wrapped, language="text")
+            st.code(decoded, language="text")
+            st.caption("📋 Click the icon in the top-right to copy.")
+
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
