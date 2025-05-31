@@ -26,8 +26,28 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
-            st.success("Decoded Output")
-            st.code(decoded_text, language="text")
+            st.success("Decoded URL")
+
+            # Wrapped display for readability
+            st.text_area("Decoded text (wrapped):", value=decoded_text, height=100, disabled=True)
+
+            # Hidden code block to use Streamlit's built-in copy button
+            st.markdown(
+                """
+                <style>
+                div[data-testid="stCodeBlock"] pre {
+                    color: transparent !important;
+                    background: transparent !important;
+                    height: 1px;
+                    overflow: hidden;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+            st.code(decoded_text, language="text")  # Just to show the copy icon
+
+            st.caption("✅ Use the copy button above to copy the decoded URL.")
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
