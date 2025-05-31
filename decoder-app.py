@@ -35,15 +35,17 @@ if decode_clicked:
                     word-wrap: break-word;
                     white-space: pre-wrap;
                     font-family: monospace;
-                    background-color: #f0f2f6;
+                    background-color: #e5e7eb;  /* light gray */
+                    color: #111827;  /* dark text */
                     padding: 1rem;
                     border-radius: 6px;
-                    border: 1px solid #ccc;
+                    border: 1px solid #d1d5db;
                     text-align: left;
-                ">
+                    transition: background-color 0.2s;
+                " title="Click to copy">
                     {decoded_text}
                 </div>
-                <p id="copied-msg" style="text-align: center; color: green; font-size: 0.85rem; display: none; margin-top: 5px;">Copied to clipboard!</p>
+                <p id="copied-msg" style="text-align: center; color: green; font-size: 0.85rem; display: none; margin-top: 5px;">✅ Copied to clipboard!</p>
 
                 <script>
                 function copyDecoded() {{
@@ -51,7 +53,9 @@ if decode_clicked:
                     navigator.clipboard.writeText(text).then(function() {{
                         const msg = document.getElementById("copied-msg");
                         msg.style.display = "block";
-                        setTimeout(() => msg.style.display = "none", 2000);
+                        setTimeout(() => {{
+                            msg.style.display = "none";
+                        }}, 2000);
                     }});
                 }}
                 </script>
