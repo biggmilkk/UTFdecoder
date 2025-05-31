@@ -28,10 +28,10 @@ if decode_clicked:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded URL")
 
-            # Use <pre> inside the clickable div to preserve formatting and eliminate extra spacing
+            # Display decoded URL and setup clean copy logic
             st.markdown(
                 f"""
-                <div id="decoded-box" onclick="copyDecoded()" style="
+                <div onclick="copyDecoded()" style="
                     cursor: pointer;
                     font-family: monospace;
                     background-color: #ffffff;
@@ -46,20 +46,24 @@ if decode_clicked:
                 " title="Click to copy">
                     <pre style="margin: 0; white-space: pre-wrap;">{decoded_text}</pre>
                 </div>
+
+                <textarea id="hidden-copy-target" style="position: absolute; left: -9999px;">{decoded_text}</textarea>
+
                 <div id="copied-msg" style="text-align: center; display: none; margin-top: 10px;">
                     <span style="color: green; font-weight: 500;">✅ Copied to clipboard!</span>
                 </div>
 
                 <script>
                 function copyDecoded() {{
-                    const text = document.getElementById("decoded-box").innerText;
-                    navigator.clipboard.writeText(text).then(function() {{
-                        const msg = document.getElementById("copied-msg");
-                        msg.style.display = "block";
-                        setTimeout(() => {{
-                            msg.style.display = "none";
-                        }}, 2000);
-                    }});
+                    var copyTarget = document.getElementById("hidden-copy-target");
+                    copyTarget.select();
+                    document.execCommand("copy");
+
+                    var msg = document.getElementById("copied-msg");
+                    msg.style.display = "block";
+                    setTimeout(function() {{
+                        msg.style.display = "none";
+                    }}, 2000);
                 }}
                 </script>
                 """,
