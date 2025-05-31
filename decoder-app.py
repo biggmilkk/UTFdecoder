@@ -28,25 +28,29 @@ if decode_clicked:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded URL")
 
-            # Show wrapped decoded text in a nice, readable box
+            # Show wrapped decoded URL in readable area
             st.text_area("Decoded (wrapped):", value=decoded_text, height=100, disabled=True)
 
-            # Hide content of st.code but keep copy button
+            # Inject the code block and fully hide its contents, but keep the copy icon
             st.markdown(
-                """
+                f"""
                 <style>
-                /* Hide the code text while keeping the copy button */
-                div[data-testid="stCodeBlock"] pre,
-                div[data-testid="stCodeBlock"] code {
-                    display: none !important;
-                }
+                .hidden-code-block pre,
+                .hidden-code-block code {{
+                    visibility: hidden;
+                    max-height: 0;
+                    padding: 0;
+                    margin: 0;
+                }}
                 </style>
+                <div class="hidden-code-block">
                 """,
                 unsafe_allow_html=True
             )
-            st.code(decoded_text, language="text")  # Triggers copy button
+            st.code(decoded_text, language="text")
+            st.markdown("</div>", unsafe_allow_html=True)
 
-            st.caption("✅ Click the copy icon above to copy the full decoded URL.")
+            st.caption("✅ Click the copy icon above to copy the decoded URL.")
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
