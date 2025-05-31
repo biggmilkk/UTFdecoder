@@ -27,10 +27,16 @@ if decode_clicked:
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded Output")
+
+            # Render decoded text with wrap
             st.markdown(
-                f"<div style='word-wrap: break-word; white-space: pre-wrap; font-family: monospace; background-color: #f0f2f6; padding: 1rem; border-radius: 6px;'>{decoded_text}</div>",
+                f"""
+                <div id="decoded" style='word-wrap: break-word; white-space: pre-wrap; font-family: monospace; background-color: #f0f2f6; padding: 1rem; border-radius: 6px;'>{decoded_text}</div>
+                <button onclick="navigator.clipboard.writeText(document.getElementById('decoded').innerText)" style='margin-top: 10px; padding: 0.5rem 1rem; font-size: 0.85rem; border: none; background-color: #2563eb; color: white; border-radius: 6px; cursor: pointer;'>Copy to Clipboard</button>
+                """,
                 unsafe_allow_html=True
             )
+
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
