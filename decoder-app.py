@@ -26,8 +26,39 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
-            st.success("Decoded Output")
-            st.code(decoded_text, language="text")
+            st.success("Decoded URL")
+
+            st.markdown(
+                f"""
+                <div id="decoded-box" onclick="copyDecoded()" style="
+                    cursor: pointer;
+                    word-wrap: break-word;
+                    white-space: pre-wrap;
+                    font-family: monospace;
+                    background-color: #f0f2f6;
+                    padding: 1rem;
+                    border-radius: 6px;
+                    border: 1px solid #ccc;
+                    text-align: left;
+                ">
+                    {decoded_text}
+                </div>
+                <p id="copied-msg" style="text-align: center; color: green; font-size: 0.85rem; display: none; margin-top: 5px;">Copied to clipboard!</p>
+
+                <script>
+                function copyDecoded() {{
+                    const text = document.getElementById("decoded-box").innerText;
+                    navigator.clipboard.writeText(text).then(function() {{
+                        const msg = document.getElementById("copied-msg");
+                        msg.style.display = "block";
+                        setTimeout(() => msg.style.display = "none", 2000);
+                    }});
+                }}
+                </script>
+                """,
+                unsafe_allow_html=True
+            )
+
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
