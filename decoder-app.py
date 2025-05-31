@@ -26,8 +26,8 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
-            st.success("Decoded URL")
-            st.text_area("Decoded Result:", value=decoded_text, height=100, disabled=True)
+            st.success("Decoded Output")
+            st.code(decoded_text, language="text")
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
