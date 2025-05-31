@@ -27,26 +27,7 @@ if decode_clicked:
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded URL")
-
-            # Display decoded text with copy button
-            st.markdown(
-                f"""
-                <div style='word-wrap: break-word; white-space: pre-wrap; font-family: monospace; background-color: #f0f2f6; padding: 1rem; border-radius: 6px; text-align: left;'>{decoded_text}</div>
-                <textarea id="decodedText" style="position: absolute; left: -9999px;">{decoded_text}</textarea>
-                <div style='text-align: center; margin-top: 10px;'>
-                    <button onclick="copyDecoded()" style='padding: 0.5rem 1.25rem; font-size: 0.85rem; border: none; background-color: #2563eb; color: white; border-radius: 6px; cursor: pointer;'>Copy to Clipboard</button>
-                </div>
-                <script>
-                    function copyDecoded() {{
-                        var text = document.getElementById("decodedText");
-                        text.select();
-                        document.execCommand("copy");
-                    }}
-                </script>
-                """,
-                unsafe_allow_html=True
-            )
-
+            st.text_area("Decoded Result:", value=decoded_text, height=100, disabled=True)
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
