@@ -26,13 +26,15 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
-            st.success("Decoded Output")
+            st.success("Decoded URL")
 
-            # Render decoded text with wrap
+            # Output and centered copy button
             st.markdown(
                 f"""
-                <div id="decoded" style='word-wrap: break-word; white-space: pre-wrap; font-family: monospace; background-color: #f0f2f6; padding: 1rem; border-radius: 6px;'>{decoded_text}</div>
-                <button onclick="navigator.clipboard.writeText(document.getElementById('decoded').innerText)" style='margin-top: 10px; padding: 0.5rem 1rem; font-size: 0.85rem; border: none; background-color: #2563eb; color: white; border-radius: 6px; cursor: pointer;'>Copy to Clipboard</button>
+                <div style='word-wrap: break-word; white-space: pre-wrap; font-family: monospace; background-color: #f0f2f6; padding: 1rem; border-radius: 6px; text-align: left;' id="decoded">{decoded_text}</div>
+                <div style='text-align: center; margin-top: 10px;'>
+                    <button onclick="navigator.clipboard.writeText(document.getElementById('decoded').innerText)" style='padding: 0.5rem 1.25rem; font-size: 0.85rem; border: none; background-color: #2563eb; color: white; border-radius: 6px; cursor: pointer;'>Copy to Clipboard</button>
+                </div>
                 """,
                 unsafe_allow_html=True
             )
