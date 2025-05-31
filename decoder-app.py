@@ -7,12 +7,12 @@ st.set_page_config(page_title="UTF-8 Decoder", layout="centered")
 # --- Title ---
 st.markdown("<h2 style='text-align: center;'>UTF-8 URL Decoder</h2>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align: center; font-size: 0.9rem; color: grey;'>Paste a UTF-8 encoded URL below to decode it. This app uses Streamlit’s built-in copy button for convenience.</p>",
+    "<p style='text-align: center; font-size: 0.9rem; color: grey;'>Paste a UTF-8 encoded URL below to decode it.</p>",
     unsafe_allow_html=True
 )
 
 # --- Input ---
-st.markdown("#### Input")
+st.markdown("#### Encoded Text")
 
 with st.form("decode_form"):
     utf8_input = st.text_area(
