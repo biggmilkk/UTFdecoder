@@ -28,12 +28,11 @@ if decode_clicked:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded URL")
 
+            # Use <pre> inside the clickable div to preserve formatting and eliminate extra spacing
             st.markdown(
                 f"""
                 <div id="decoded-box" onclick="copyDecoded()" style="
                     cursor: pointer;
-                    word-wrap: break-word;
-                    white-space: pre-wrap;
                     font-family: monospace;
                     background-color: #ffffff;
                     color: #000000;
@@ -42,8 +41,10 @@ if decode_clicked:
                     border: 2px solid #2563eb;
                     text-align: left;
                     transition: background-color 0.2s;
+                    word-wrap: break-word;
+                    white-space: pre-wrap;
                 " title="Click to copy">
-                    {decoded_text}
+                    <pre style="margin: 0; white-space: pre-wrap;">{decoded_text}</pre>
                 </div>
                 <div id="copied-msg" style="text-align: center; display: none; margin-top: 10px;">
                     <span style="color: green; font-weight: 500;">✅ Copied to clipboard!</span>
