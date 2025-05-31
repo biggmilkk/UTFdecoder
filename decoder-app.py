@@ -27,48 +27,8 @@ if decode_clicked:
         try:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded URL")
-
-            # Render the decoded text with copy functionality
-            st.markdown(
-                f"""
-                <textarea id="copy-source" style="position: absolute; left: -9999px;">{decoded_text}</textarea>
-
-                <div onclick="copyDecoded()" style="
-                    cursor: pointer;
-                    font-family: monospace;
-                    background-color: #ffffff;
-                    color: #000000;
-                    padding: 1rem;
-                    border-radius: 6px;
-                    border: 2px solid #2563eb;
-                    text-align: left;
-                    transition: background-color 0.2s;
-                    word-wrap: break-word;
-                    white-space: pre-wrap;
-                " title="Click to copy">
-                    <pre style="margin: 0; white-space: pre-wrap;">{decoded_text}</pre>
-                </div>
-
-                <div id="copied-msg" style="text-align: center; display: none; margin-top: 10px;">
-                    <span style="color: green; font-weight: 500;">✅ Copied to clipboard!</span>
-                </div>
-
-                <script>
-                function copyDecoded() {{
-                    var value = document.getElementById("copy-source").value;
-                    navigator.clipboard.writeText(value).then(function() {{
-                        var msg = document.getElementById("copied-msg");
-                        msg.style.display = "block";
-                        setTimeout(function() {{
-                            msg.style.display = "none";
-                        }}, 2000);
-                    }});
-                }}
-                </script>
-                """,
-                unsafe_allow_html=True
-            )
-
+            st.text_area("Click and copy the decoded URL:", value=decoded_text, height=100, disabled=True)
+            st.caption("Select the text above and press Ctrl+C or right-click to copy.")
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
