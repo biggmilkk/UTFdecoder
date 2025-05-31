@@ -28,9 +28,11 @@ if decode_clicked:
             decoded_text = urllib.parse.unquote(utf8_input)
             st.success("Decoded URL")
 
-            # Display decoded URL and setup clean copy logic
+            # Render the decoded text with copy functionality
             st.markdown(
                 f"""
+                <textarea id="copy-source" style="position: absolute; left: -9999px;">{decoded_text}</textarea>
+
                 <div onclick="copyDecoded()" style="
                     cursor: pointer;
                     font-family: monospace;
@@ -47,23 +49,20 @@ if decode_clicked:
                     <pre style="margin: 0; white-space: pre-wrap;">{decoded_text}</pre>
                 </div>
 
-                <textarea id="hidden-copy-target" style="position: absolute; left: -9999px;">{decoded_text}</textarea>
-
                 <div id="copied-msg" style="text-align: center; display: none; margin-top: 10px;">
                     <span style="color: green; font-weight: 500;">✅ Copied to clipboard!</span>
                 </div>
 
                 <script>
                 function copyDecoded() {{
-                    var copyTarget = document.getElementById("hidden-copy-target");
-                    copyTarget.select();
-                    document.execCommand("copy");
-
-                    var msg = document.getElementById("copied-msg");
-                    msg.style.display = "block";
-                    setTimeout(function() {{
-                        msg.style.display = "none";
-                    }}, 2000);
+                    var value = document.getElementById("copy-source").value;
+                    navigator.clipboard.writeText(value).then(function() {{
+                        var msg = document.getElementById("copied-msg");
+                        msg.style.display = "block";
+                        setTimeout(function() {{
+                            msg.style.display = "none";
+                        }}, 2000);
+                    }});
                 }}
                 </script>
                 """,
