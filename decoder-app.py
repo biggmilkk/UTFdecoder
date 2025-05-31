@@ -40,7 +40,6 @@ if decode_clicked:
 
             st.markdown("#### Decoded URL")
             st.code(decoded, language="text")
-            st.caption("📋 Click the icon in the top-right to copy.")
 
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
