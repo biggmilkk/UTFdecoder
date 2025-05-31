@@ -7,7 +7,8 @@ st.set_page_config(page_title="UTF-8 URL Decoder", layout="centered")
 # --- Title ---
 st.markdown("<h2 style='text-align: center;'>UTF-8 URL Decoder</h2>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align: center; font-size: 0.9rem; color: grey;'>Paste a UTF-8 encoded URL below to decode it. No data is stored.</p>",
+    "<p style='text-align: center; font-size: 0.9rem; color: grey;'>"
+    "Paste a UTF-8 encoded URL below to decode it. No data is stored.</p>",
     unsafe_allow_html=True
 )
 
@@ -25,9 +26,13 @@ if decode_clicked:
     if utf8_input.strip():
         try:
             decoded = urllib.parse.unquote(utf8_input)
+
+            # --- Wrap decoded text to improve visual height in st.code ---
             wrapped = "\n".join(textwrap.wrap(decoded, width=80))
+
             st.markdown("#### Decoded URL")
-            st.code(wrapped, language="text")
+            st.code(wrapped, language="text")  # ✅ Copy icon works
+
         except Exception:
             st.error("Invalid UTF-8 encoded string. Please check your input.")
     else:
