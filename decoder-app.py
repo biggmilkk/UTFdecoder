@@ -11,12 +11,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- Custom style to change code block background to light red ---
+# --- Custom style to change code block to dark gray with white text ---
 st.markdown("""
     <style>
     pre {
-        background-color: #ffecec !important;  /* Light red background */
-        color: #8b0000 !important;             /* Dark red text */
+        background-color: #2e2e2e !important;  /* Dark gray background */
+        color: #ffffff !important;             /* White text */
         border-radius: 6px;
         padding: 1rem;
         font-size: 0.95rem;
